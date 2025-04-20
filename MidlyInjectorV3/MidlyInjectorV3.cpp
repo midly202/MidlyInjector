@@ -2,7 +2,7 @@
 
 int main()
 {
-    std::cout << "MidlyInjector32 initialized. Please select a DLL to inject.\n";
+    std::cout << "MidlyInjector64 initialized. Please select a DLL to inject.\n";
     std::string dllPath = GetDLLPath();
     if (dllPath.empty())
     {
@@ -14,7 +14,9 @@ int main()
     std::cout << "Enter process name: ";
     std::getline(std::cin, procName);
 
-    if (procName == "ac")
+    if (procName == "cotw" || procName == "COTW")
+        procName = "theHunterCotW_F.exe";
+    else if (procName == "ac" || procName == "AC")
         procName = "ac_client.exe";
 
     uintptr_t procId = GetProcId(procName);
