@@ -2,11 +2,13 @@
 
 int main()
 {
-    std::cout << "MidlyInjector64 initialized. Please select a DLL to inject.\n";
+    std::cout << "MidlyInjector64 initialized. \nPlease select a DLL to inject.\n";
     std::string dllPath = GetDLLPath();
     if (dllPath.empty())
     {
-        std::cout << "No DLL selected.\n";
+        system("cls");
+        std::cout << "MidlyInjector64 initialized. \nNo DLL selected, exiting. . .\n";
+        Sleep(1500);
         return 1;
     }
 
@@ -18,6 +20,8 @@ int main()
         procName = "theHunterCotW_F.exe";
     else if (procName == "ac" || procName == "AC")
         procName = "ac_client.exe";
+    else if (procName == "r6" || procName == "R6" || procName == "r" || procName == "R")
+        procName = "RainbowSix.exe";
 
     uintptr_t procId = GetProcId(procName);
     system("cls");
