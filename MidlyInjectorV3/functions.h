@@ -90,23 +90,3 @@ std::string GetDLLPath()
 
     return GetOpenFileNameA(&ofn) ? std::string(filename) : "";
 }
-
-uintptr_t SelectProcess()
-{
-    uintptr_t pid = 0;
-    HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
-    if (hSnap == INVALID_HANDLE_VALUE) return 0;
-
-    PROCESSENTRY32 pe;
-    pe.dwSize = sizeof(pe);
-
-    std::cout << "Running Processes:\n";
-    for (BOOL ok = Process32First(hSnap, &pe); ok; ok = Process32Next(hSnap, &pe)) {
-        std::wcout << " - " << pe.szExeFile << " [PID: " << pe.th32ProcessID << "]\n";
-    }
-    CloseHandle(hSnap);
-
-    std::cout << "\nEnter PID of target process: ";
-    std::cin >> pid;
-    return pid;
-}
